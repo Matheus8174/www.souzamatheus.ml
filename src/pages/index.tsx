@@ -15,7 +15,7 @@ const Home: NextPage = () => (
           className="text-blue-500"
           href="https://github.com/Matheus8174/boilerplate-sb-next-tailwind-typescript"
         >
-          give an star
+          give a star
         </a>
       </p>
     </div>

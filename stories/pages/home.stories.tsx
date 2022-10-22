@@ -16,5 +16,9 @@ export const Default: StoryFn = Template.bind({});
 Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  await waitFor(() => expect(canvas.getByText('Hello world')).toBeInTheDocument());
+  await waitFor(() =>
+    expect(
+      canvas.getByText('Typescript, Tailwind and Storybook'),
+    ).toBeInTheDocument(),
+  );
 };

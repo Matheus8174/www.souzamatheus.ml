@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006 --quiet -s ./public",
-    "storybook:build": "build-storybook -s ./public",
+    "storybook": "start-storybook -p 6006 --quiet",
+    "storybook:build": "build-storybook",
     "storybook:test": "test-storybook"
   },
   "dependencies": {

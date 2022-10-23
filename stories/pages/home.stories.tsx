@@ -18,7 +18,7 @@ Default.play = async ({ canvasElement }) => {
 
   await waitFor(() =>
     expect(
-      canvas.getByText('Typescript, Tailwind and Storybo'),
+      canvas.getByText('Typescript, Tailwind and Storybook'),
     ).toBeInTheDocument(),
   );
 };

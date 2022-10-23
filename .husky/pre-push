@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+  "npx http-server npm run storybook --silent" \
+  "npx wait-on tcp:6006 && npm run storybook:test"

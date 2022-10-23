@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 
+// Home page
 const Home: NextPage = () => (
   <div className="flex h-screen w-screen flex-col items-center justify-center gap-10 bg-black text-white">
     <h1 className="text-3xl font-bold text-white">NEXT BOILERPLATE</h1>

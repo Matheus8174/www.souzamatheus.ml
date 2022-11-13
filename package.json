@@ -9,8 +9,8 @@
     "lint": "next lint",
     "storybook": "start-storybook -p 6006 --quiet",
     "storybook:build": "build-storybook",
-    "storybook:test": "test-storybook",
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"npm run storybook:build --quiet && npx http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && npm run storybook:test\"",
+    "storybook:test": "test-storybook",
     "prepare": "husky install"
   },
   "dependencies": {

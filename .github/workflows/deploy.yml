@@ -20,6 +20,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Run tests job
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install --only=dev
+      - name: Run Storybook tests
+        run: npm run test-storybook:ci
+
   # Build job
   build:
     runs-on: ubuntu-latest

@@ -5,7 +5,7 @@ import React from 'react';
 import { useColorMode, Box } from '@chakra-ui/react';
 
 import toggleLightDark from '@public/lottie/toggle-light-dark.json';
-import useLottieAnimation from 'hooks/useLottieAnimation';
+import useLottieAnimation from 'src/hooks/useLottieAnimation';
 
 const ToggleThemeButton: React.FC = () => {
   const { ref, lottie } = useLottieAnimation({

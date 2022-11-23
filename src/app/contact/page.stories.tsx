@@ -2,14 +2,14 @@ import { Meta, StoryFn } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import { waitFor, within } from '@storybook/testing-library';
 
-import Home from '@pages/page';
+import Contact from 'src/app/contact/page';
 
 export default {
-  title: 'Pages/Home',
-  component: Home,
+  title: 'Pages/Contact',
+  component: Contact,
 } as Meta;
 
-const Template = () => <Home />;
+const Template = () => <Contact />;
 
 export const Default: StoryFn = Template.bind({});
 
@@ -18,9 +18,7 @@ Default.play = async ({ canvasElement }) => {
 
   await waitFor(() =>
     expect(
-      canvas.getByText(
-        'Trabalho no desenvolvimento de aplicações web performáticas e com foco na experiência de usuário.',
-      ),
+      canvas.getByText('Typescript, Tailwind and Storybook'),
     ).toBeInTheDocument(),
   );
 };

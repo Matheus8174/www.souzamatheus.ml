@@ -10,10 +10,10 @@ import {
   theme as chakraTheme,
 } from '@chakra-ui/react';
 
-import Header from '@components/Header';
-import Footer from '@components/Footer';
+import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
 
-import theme from '@styles/theme';
+import theme from 'src/styles/theme';
 
 function Providers({ children }: PropsWithChildren) {
   const { space } = chakraTheme;

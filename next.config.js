@@ -2,4 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   assetPrefix: './',
+  experimental: {
+    appDir: true,
+  },
 };

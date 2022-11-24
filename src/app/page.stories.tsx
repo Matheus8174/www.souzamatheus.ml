@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import { waitFor, within } from '@storybook/testing-library';
 
-import Home from 'src/app/page';
+import Home from './page';
 
 export default {
   title: 'Pages/Home',

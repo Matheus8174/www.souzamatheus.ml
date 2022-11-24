@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 import { AiFillGithub, AiFillMail, AiFillLinkedin } from 'react-icons/ai';
 
-import Icon from 'src/components/Icon';
+import Icon from '@components/Icon';
 import DevAnimation from '../animations/DevAnimation';
 
 function Home() {

@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { expect } from '@storybook/jest';
 import { waitFor, within } from '@storybook/testing-library';
 
-import Contact from 'src/app/contact/page';
+import Contact from './page';
 
 export default {
   title: 'Pages/Contact',

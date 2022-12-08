@@ -29,6 +29,10 @@ function Home() {
     >
       <Head>
         <title>Home | Matheus Araújo</title>
+        <meta
+          name="google-site-verification"
+          content="4VK3KzetseTTtHQ8SDbdUh4miC9HeucNK9QAMUqvqXU"
+        />
       </Head>
       <VStack h="full">
         <Box

@@ -1,38 +1,30 @@
-'use client';
-
 import React from 'react';
 
-import { useColorMode, Box } from '@chakra-ui/react';
+import {
+  useColorMode,
+  Icon,
+  Button,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
-import toggleLightDark from '@public/lottie/toggle-light-dark.json';
-import useLottieAnimation from '../hooks/useLottieAnimation';
+import { FiMoon, FiSun } from 'react-icons/fi';
 
 const ToggleThemeButton: React.FC = () => {
-  const { ref, lottie } = useLottieAnimation({
-    animationData: toggleLightDark,
-    initialSegment: [0, 35],
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-  });
-
   const { toggleColorMode } = useColorMode();
 
-  const toggleIconTheme = React.useRef(false);
-
-  function handleClick() {
-    toggleColorMode();
-
-    lottie?.setDirection(toggleIconTheme.current ? -1 : 1);
-
-    lottie?.setSpeed(1.8);
-    lottie?.play();
-
-    toggleIconTheme.current = !toggleIconTheme.current;
-  }
-
   return (
-    <Box width="20" cursor="pointer" ref={ref} onClick={() => handleClick()} />
+    <Button
+      onClick={() => toggleColorMode()}
+      leftIcon={
+        <Icon
+          fontSize="20"
+          color={useColorModeValue('blue.500', 'pink.400')}
+          as={useColorModeValue(FiMoon, FiSun)}
+        />
+      }
+    >
+      MUDAR TEMA
+    </Button>
   );
 };
 

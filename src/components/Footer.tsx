@@ -1,10 +1,9 @@
-'use client';
-
 import { FaCopyright } from 'react-icons/fa';
 import { Icon, HStack, Text, useColorMode } from '@chakra-ui/react';
 
 function Footer() {
   const { colorMode } = useColorMode();
+  const currentYear = new Date().getFullYear();
 
   return (
     <HStack align="center" justify="center" h="full">
@@ -13,9 +12,7 @@ function Footer() {
         as={FaCopyright}
         fontSize="20"
       />
-      <Text>
-        {`2021-${new Date().getFullYear()} Feito com ❤️ por Matheus Araújo.`}
-      </Text>
+      <Text>2021-{currentYear} Feito com ❤️ por Matheus Araújo.</Text>
     </HStack>
   );
 }

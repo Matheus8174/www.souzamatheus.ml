@@ -42,16 +42,16 @@ function Home() {
           <DevAnimation />
         </Box>
         <HStack justify="space-around" align="center" w="full" spacing="4">
-          <Link
-            href="https://www.linkedin.com/in/matheus-ara%C3%BAjo-4561821ba/"
-            target="_blank"
-          >
+          <Link href="https://github.com/Matheus8174" target="_blank">
             <Icon icon={AiFillGithub} colorMode={colorMode} title="Github" />
           </Link>
           <Link href="mailto:souzamatheus8174@gmail.com">
             <Icon icon={AiFillMail} title="Email" colorMode={colorMode} />
           </Link>
-          <Link href="https://github.com/Matheus8174" target="_blank">
+          <Link
+            href="https://www.linkedin.com/in/matheus-ara%C3%BAjo-4561821ba/"
+            target="_blank"
+          >
             <Icon
               icon={AiFillLinkedin}
               title="Linkedin"

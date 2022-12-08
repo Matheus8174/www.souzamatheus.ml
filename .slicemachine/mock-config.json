@@ -1,0 +1,25 @@
+{
+  "slices": {
+    "PostParagrah": {
+      "default": {
+        "primary": {
+          "description": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          },
+          "title": {
+            "config": {
+              "patternType": "HEADING",
+              "blocks": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "_cts": {
+    "post": {}
+  }
+}

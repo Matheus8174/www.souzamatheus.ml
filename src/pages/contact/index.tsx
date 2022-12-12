@@ -4,50 +4,64 @@ import {
   Text,
   Button,
   LightMode,
-  FormControl,
-  FormLabel,
-  Input,
   VStack,
   useToast,
   Box,
-  FormHelperText,
   chakra,
 } from '@chakra-ui/react';
-import { useForm } from '@formspree/react';
 import Head from 'next/head';
+import { z } from 'zod';
 
-type InputData = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+import { useForm as formspreeUseForm } from '@formspree/react';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import FormInput from '@components/FormInput';
+
+const InputSchema = z.object({
+  name: z
+    .string()
+    .min(5, { message: 'o nome precisa ter no minimo 5 caracteres' })
+    .nullable(),
+
+  email: z.string().email({
+    message: 'precisa ser um email válido',
+  }),
+  subject: z.string().min(5, {
+    message: 'o assunto precisa ter no minimo 5 caracteres',
+  }),
+  message: z.string().min(20, {
+    message: 'a mensagem precisa ter no minimo 20 caracteres',
+  }),
+});
+
+export type InputData = z.infer<typeof InputSchema>;
 
 function Contact() {
   const formRef = React.useRef<HTMLFormElement>(null);
+
   const toast = useToast();
-  const [inputData, setInputData] = React.useState<InputData>({
-    name: '',
-    email: '',
-    message: '',
-    subject: '',
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    reset,
+    formState: { errors },
+  } = useForm<InputData>({
+    resolver: zodResolver(InputSchema),
   });
 
-  const [state, handleSubmit] = useForm(
+  const [state, handleSubmitFormspree] = formspreeUseForm(
     process.env.NEXT_PUBLIC_FORMSPREE_HASHID as string,
-    { data: { subject: inputData.subject } },
+    { data: { subject: getValues().subject } },
   );
 
-  const handleInputData = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-    setInputData((prev) => ({ ...prev, [target.id]: target.value }));
-
-  async function handleForm(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const { response } = await handleSubmit(inputData);
+  async function handleForm(inputData: InputData) {
+    const { response } = await handleSubmitFormspree(inputData);
 
     if (response.ok) {
-      formRef.current?.reset();
+      reset();
 
       toast({
         title: '🚀 E-mail enviado com sucesso!',
@@ -88,54 +102,51 @@ function Contact() {
         }}
         px="6"
         as="form"
-        onSubmit={handleForm}
+        onSubmit={handleSubmit(handleForm)}
       >
         <VStack spacing="4" w="100%">
-          <FormControl isRequired>
-            <FormLabel htmlFor="name">Nome:</FormLabel>
-            <Input
-              id="name"
-              type="text"
-              variant="filled"
-              onChange={handleInputData}
-              isRequired
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="email">Email:</FormLabel>
-            <Input
-              id="email"
-              type="email"
-              variant="filled"
-              isRequired
-              onChange={handleInputData}
-            />
+          <FormInput
+            inputName="name"
+            errors={errors.name}
+            label="Nome:"
+            type="text"
+            placeholder="Seu nome"
+            variant="filled"
+            register={register}
+          />
+          <FormInput
+            inputName="email"
+            errors={errors.email}
+            label="Email:"
+            type="email"
+            placeholder="Digite seu e-mail"
+            variant="filled"
+            helperText="seu e-mail não será compartilhado."
+            register={register}
+          />
+          <FormInput
+            inputName="subject"
+            errors={errors.subject}
+            label="Assunto:"
+            type="text"
+            placeholder="Assunto da mensagem"
+            variant="filled"
+            register={register}
+          />
+          <FormInput
+            inputName="message"
+            errors={errors.message}
+            label="Mensagem:"
+            type="text"
+            placeholder="Conteúdo da mensagem"
+            variant="filled"
+            register={register}
+          />
 
-            <FormHelperText>seu e-mail não será compartilhado.</FormHelperText>
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="subject">Assunto:</FormLabel>
-            <Input
-              id="subject"
-              type="text"
-              variant="filled"
-              isRequired
-              onChange={handleInputData}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="message">Mensagem:</FormLabel>
-            <Input
-              id="message"
-              type="text"
-              variant="filled"
-              isRequired
-              onChange={handleInputData}
-            />
-          </FormControl>
           <Box>
             <LightMode>
               <Button
+                title="submit"
                 disabled={state.submitting}
                 type="submit"
                 colorScheme="pink"

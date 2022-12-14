@@ -8,6 +8,10 @@ import {
   useToast,
   Box,
   chakra,
+  HStack,
+  useColorModeValue,
+  TextProps,
+  Stack,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import { z } from 'zod';
@@ -18,12 +22,12 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import FormInput from '@components/FormInput';
+import MailAnimation from '../../animations/MailAnimation';
 
 const InputSchema = z.object({
   name: z
     .string()
-    .min(5, { message: 'o nome precisa ter no minimo 5 caracteres' })
-    .nullable(),
+    .min(5, { message: 'o nome precisa ter no minimo 5 caracteres' }),
 
   email: z.string().email({
     message: 'precisa ser um email válido',
@@ -38,10 +42,17 @@ const InputSchema = z.object({
 
 export type InputData = z.infer<typeof InputSchema>;
 
-function Contact() {
-  const formRef = React.useRef<HTMLFormElement>(null);
+const Title = (props: TextProps) => {
+  return (
+    <Text as="h1" mb="6" fontSize="3xl" fontWeight="bold" {...props}>
+      Entre em contato
+    </Text>
+  );
+};
 
+function Contact() {
   const toast = useToast();
+
   const {
     register,
     handleSubmit,
@@ -80,85 +91,118 @@ function Contact() {
   }
 
   return (
-    <VStack spacing="6" align="center" w="100%">
+    <Stack
+      align="center"
+      justify="center"
+      w="100%"
+      direction={{
+        base: 'column',
+        lg: 'row',
+      }}
+    >
       <Head>
         <title>Contato | Matheus Araújo</title>
       </Head>
-      <Text
-        as="h1"
-        fontSize={{
-          base: '3xl',
-        }}
-        fontWeight="bold"
-      >
-        Entre em contato
-      </Text>
 
-      <chakra.form
-        ref={formRef}
-        w={{
-          base: '100%',
-          md: 'xl',
+      <Title
+        display={{
+          base: 'block',
+          lg: 'none',
         }}
+      />
+
+      <HStack
+        rounded="lg"
+        bg={useColorModeValue('gray.100', 'gray.900')}
+        align="center"
+        display={{
+          base: 'none',
+          lg: 'flex',
+        }}
+        justify="center"
+        w="lg"
+        h="full"
+      >
+        <Box w="400px" h="400px">
+          <MailAnimation />
+        </Box>
+      </HStack>
+      <HStack
         px="6"
-        as="form"
-        onSubmit={handleSubmit(handleForm)}
+        justify={{ base: 'center', lg: 'start' }}
+        align="center"
+        minW={{
+          base: '100%',
+          lg: 'lg',
+        }}
       >
-        <VStack spacing="4" w="100%">
-          <FormInput
-            inputName="name"
-            errors={errors.name}
-            label="Nome:"
-            type="text"
-            placeholder="Seu nome"
-            variant="filled"
-            register={register}
-          />
-          <FormInput
-            inputName="email"
-            errors={errors.email}
-            label="Email:"
-            type="email"
-            placeholder="Digite seu e-mail"
-            variant="filled"
-            helperText="seu e-mail não será compartilhado."
-            register={register}
-          />
-          <FormInput
-            inputName="subject"
-            errors={errors.subject}
-            label="Assunto:"
-            type="text"
-            placeholder="Assunto da mensagem"
-            variant="filled"
-            register={register}
-          />
-          <FormInput
-            inputName="message"
-            errors={errors.message}
-            label="Mensagem:"
-            type="text"
-            placeholder="Conteúdo da mensagem"
-            variant="filled"
-            register={register}
+        <chakra.form w="full" as="form" onSubmit={handleSubmit(handleForm)}>
+          <Title
+            display={{
+              base: 'none',
+              lg: 'block',
+            }}
           />
 
-          <Box>
-            <LightMode>
-              <Button
-                title="submit"
-                disabled={state.submitting}
-                type="submit"
-                colorScheme="pink"
-                mt="4"
-              >
-                ENVIAR
-              </Button>
-            </LightMode>
-          </Box>
-        </VStack>
-      </chakra.form>
-    </VStack>
+          <VStack spacing="4" w="100%">
+            <FormInput
+              inputName="name"
+              errors={errors.name}
+              label="Nome:"
+              type="text"
+              placeholder="Seu nome"
+              variant="filled"
+              register={register}
+            />
+            <FormInput
+              inputName="email"
+              errors={errors.email}
+              label="Email:"
+              type="email"
+              placeholder="Digite seu e-mail"
+              variant="filled"
+              helperText="seu e-mail não será compartilhado."
+              register={register}
+            />
+            <FormInput
+              inputName="subject"
+              errors={errors.subject}
+              label="Assunto:"
+              type="text"
+              placeholder="Assunto da mensagem"
+              variant="filled"
+              register={register}
+            />
+            <FormInput
+              inputName="message"
+              errors={errors.message}
+              label="Mensagem:"
+              type="text"
+              placeholder="Conteúdo da mensagem"
+              variant="filled"
+              register={register}
+            />
+
+            <Box minW="100%">
+              <HStack align="center" justify="end">
+                <LightMode>
+                  <Button
+                    minW="100%"
+                    title="submit"
+                    disabled={state.submitting}
+                    type="submit"
+                    colorScheme="pink"
+                    mt="4"
+                  >
+                    ENVIAR
+                  </Button>
+                </LightMode>
+              </HStack>
+            </Box>
+          </VStack>
+        </chakra.form>
+      </HStack>
+    </Stack>
   );
 }
 

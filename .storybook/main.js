@@ -1,8 +1,12 @@
 module.exports = {
   stories: [
-    '../stories/**/*.stories.@(js|jsx|ts|tsx)',
+    // '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../**/*.stories.mdx',
-    '../**/*.stories.@(js|jsx|ts|tsx)',
+    {
+      directory: '../src/pages/**/*.stories',
+      titlePrefix: 'Pages/',
+      files: '*.stories.*',
+    },
   ],
   addons: [
     'storybook-addon-next',

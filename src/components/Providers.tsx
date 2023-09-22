@@ -85,10 +85,10 @@ function Providers({ children }: PropsWithChildren) {
           gridTemplateRows={`${space['20']} 1fr ${space['20']}`}
           gridTemplateColumns="1fr 1fr 1fr"
           templateAreas={`
-          "header header header"
-          "content content content"
-          "footer footer footer"
-        `}
+            "header header header"
+            "content content content"
+            "footer footer footer"
+          `}
           rowGap="6"
         >
           <GridItem area="header" as="header">

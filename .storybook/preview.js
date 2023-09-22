@@ -1,8 +1,13 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import ToggleThemeButton from '../components/ToggleThemeButton';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
 
-import theme from '../styles/theme';
+import ToggleThemeButton from '../src/components/ToggleThemeButton';
+import theme from '../src/styles/theme';
+
+initialize({
+  onUnhandledRequest: 'bypass',
+});
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -47,4 +52,4 @@ const withChakra = (StoryFn, context) => {
   );
 };
 
-export const decorators = [withChakra];
+export const decorators = [withChakra, mswDecorator];

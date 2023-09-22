@@ -38,6 +38,8 @@ const Header: React.FC = () => {
     <Flex
       w="full"
       h="full"
+      borderBottom={isDark ? '2px' : ''}
+      borderBottomColor={isDark ? 'pink.500' : ''}
       align="center"
       justify="center"
       color={isDark ? 'white' : 'gray.900'}
